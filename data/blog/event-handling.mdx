@@ -1,0 +1,106 @@
+---
+title: 이벤트 핸들링
+date: '2025-02-18'
+tags: ['React']
+draft: false
+summary: 이벤트 핸들링에 대해 설명합니다.
+images:
+  [
+    '/static/images/eventhandle/btn.png',
+    '/static/images/eventhandle/alert.png',
+    '/static/images/eventhandle/event.png',
+    '/static/images/eventhandle/caniuse.png',
+  ]
+---
+
+# 이벤트 핸들링이란?
+
+Event Handling은 Event와 Handling으로 나눠서 표현할 수 있습니다.  
+**Event(이벤트)** 는 사용자의 특정 행동(예: 버튼클릭, 키보드 입력 등)을 의미하며,  
+웹 개발에서는 이러한 이벤트를 감지하고 처리하는 것이 중요합니다.
+
+**Handling(핸들링)** 은 "처리하다"라는 뜻으로,  
+즉, 이벤트가 발생했을 때 이를 감지하고 적절한 동작을 수행하는 것을 의미합니다.
+
+두 단어를 합치면 "이벤트가 발생했을 때 그것을 처리하는것"입니다.  
+예를 들어, 버튼 클릭시 경고창이 노출되는것이 있습니다.
+
+이제 리액트에서는 어떻게 처리하는지 알아보겠습니다.
+
+## 이벤트 예제
+
+```jsx
+export default function App() {
+  const handleClick = () => {
+    alert('버튼 클릭!')
+  }
+
+  return <button onClick={handleClick}>버튼 클릭</button>
+}
+```
+
+![React 버튼클릭](/static/images/eventhandle/btn.png)
+![React 경고창](/static/images/eventhandle/alert.png)
+
+코드를 살펴보면, 첫번째 이미지처럼 하나의 버튼이 있는 App 컴포넌트가 있습니다.  
+이때 버튼을 클릭하면 `onClick`이벤트가 발생하고, `handleClick`함수가 실행되어 두번째 이미지처럼 경고창이 나타납니다.
+
+## 🎯 React 주요 이벤트
+
+| 이벤트     | 설명                                       | 예제 코드                                       |
+| ---------- | ------------------------------------------ | ----------------------------------------------- |
+| `onClick`  | 사용자가 요소를 클릭할 때 실행됨           | `<button onClick={handleClick}>클릭</button>`   |
+| `onChange` | 입력 필드의 값이 변경될 때 실행됨          | `<input type="text" onChange={handleChange} />` |
+| `onSubmit` | 폼 제출 시 실행됨                          | `<form onSubmit={handleSubmit}></form>`         |
+| `onFocus`  | 입력 필드가 포커스를 받을 때 실행됨        | `<input onFocus={handleFocus} />`               |
+| `onInput`  | 사용자가 입력 필드에 값을 입력할 때 실행됨 | `<input type="text" onInput={handleInput} />`   |
+| `onScroll` | 스크롤이 발생할 때 실행됨                  | `<div onScroll={handleScroll}></div>`           |
+| `onDrag`   | 요소가 드래그될 때 실행됨                  | `<div draggable onDrag={handleDrag}></div>`     |
+| `onDrop`   | 드래그된 요소가 드롭될 때 실행됨           | `<div onDrop={handleDrop}></div>`               |
+
+이 외에도 React에는 다양한 이벤트가 있으며, 이를 활용하면 더욱 직관적이고 반응성이 높은 UI를 구현할 수 있습니다.
+
+---
+
+# 합성 이벤트란?
+
+합성 이벤트(Synthetic Base Event)는 React에서 **모든 웹 브라우저의 이벤트 객체를 하나로 통일한 형태**입니다.  
+즉, 브라우저마다 이벤트 동작 방식이 조금씩 다르지만, React에서는 이를 **일관된 방식으로 다룰 수 있도록** `SyntheticEvent`라는 객체를 제공합니다.
+
+```jsx
+export default function App() {
+  const handleClick = (e) => {
+    console.log(e)
+    alert('버튼 클릭!')
+  }
+
+  return <button onClick={handleClick}>버튼 클릭</button>
+}
+```
+
+이전의 예제에서 e를 전달받아 콘솔을 출력해보겠습니다.
+
+## 🧐 e(이벤트 객체) 란?
+
+먼저 React에서 이벤트 핸들러 함수의 첫 번째 매개변수로 전달되는 `e`는 **합성 이벤트 객체(Synthetic Event Object)** 입니다.  
+이 객체는 **브라우저의 기본 이벤트 객체(Native Event)** 를 감싸서 브라우저 간의 차이를 최소화하고, **일관된 인터페이스** 를 제공합니다.
+
+---
+
+## 📌 콘솔 출력 결과
+
+다시 본론으로 돌아와서, `e`를 콘솔에 찍어보면 아래 이미지처럼 출력됩니다.
+![React 이벤트](/static/images/eventhandle/event.png)
+
+우리가 현재 사용하는 브라우저에는 대표적으로, **'크롬'**, **'사파리'**, **'엣지'**, **'오페라'**, **'파이어폭스'** 등 너무 다양합니다.  
+문제점은 브라우저를 만드는 회사들이 전부 다 다르기 때문에, **이벤트를 처리하는 방식**에도 차이가 존재합니다.
+
+![React 객체](/static/images/eventhandle/caniuse.png)
+
+위 이미지처럼 내가 쓰려고하는 js 기능이 어떠한 브라우저에서 어떻게 동작하는지 또는 지원하는지 보여주는 사이트까지 존재합니다.
+
+"https://caniuse.com/"
+
+이때 브라우저 별 스펙이 달라 발생하는 문제를 **Cross Browsing Issue**라고 부릅니다.  
+이것을 아주 편리하게 해결하는 친구가 바로 **Synthetic Event** 입니다 .  
+이것은 여러 브라우저별 규격을 참고해서 하나의 통일된 규격으로 합쳐줍니다.

@@ -3,7 +3,7 @@ const siteMetadata = {
   title: 'Next.js Blog',
   author: 'Kim Gyumin',
   headerTitle: 'Blog',
-  description: 'A blog created with Next.js and Tailwind.css',
+  description: '항상 긍정적으로 배우는 자세와 개발자로서 성장을 최우선으로 합니다',
   language: 'en-us',
   theme: 'system', // system, dark or light
   siteUrl: 'https://tailwind-nextjs-starter-blog.vercel.app',
