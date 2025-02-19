@@ -1,11 +1,10 @@
 {
-  "react": 2,
+  "react": 3,
   "node-js": 1,
   "guide": 5,
   "multi-author": 1,
   "next-js": 4,
   "feature": 1,
-  "hello": 1,
   "tailwind": 1,
   "math": 1,
   "abc": 1,
