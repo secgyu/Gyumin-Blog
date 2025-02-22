@@ -1,0 +1,48 @@
+---
+title: '타입 별칭'
+date: '2025-02-22'
+tags: ['typescript']
+draft: false
+summary: 타입 별칭에 대해 살펴봅니다.
+---
+
+# 타입 별칭(Type Alias)
+
+`type 타입_이름 = 타입` 형태로 타입을 정의합니다.
+아래의 코드로 예시를 들어보겠습니다.
+
+```ts
+type User = {
+  id: number
+  name: string
+  nickname: string
+  birth: string
+  bio: string
+  location: string
+}
+```
+
+이렇게 만든 타입 별칭은 다음과 같이 변수의 타입을 정의할 때 타입 주석과 함께 이용할 수 있습니다.
+
+```ts
+type User = {
+  id: number
+  name: string
+  nickname: string
+  birth: string
+  bio: string
+  location: string
+}
+
+let user2: User = {
+  id: 1,
+  name: '홍길동',
+  nickname: 'Hong',
+  birth: '2001.01.01',
+  bio: '안녕하세요',
+  location: '부산광역시',
+}
+```
+
+참고로 동일한 스코프에 동일한 이름의 타입 별칭을 선언하는것은 불가능합니다.  
+마치 저희가 알고있는 **변수** 와 유사합니다.
